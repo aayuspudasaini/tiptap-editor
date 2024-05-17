@@ -17,7 +17,11 @@ import {
   AlignLeft,
   AlignRight,
   Bold,
+  CodeXml,
   Italic,
+  List,
+  ListOrderedIcon,
+  Strikethrough,
   Underline,
 } from "lucide-react";
 
@@ -55,8 +59,9 @@ export const TiptapMenuBar = ({ editor }: { editor: Editor | null }) => {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-      {/* Text */}
-      <div>
+
+      {/* Marks */}
+      <div className="border-l border-r">
         <Button
           variant={editor.isActive("bold") ? "default" : "ghost"}
           size="xs"
@@ -81,11 +86,28 @@ export const TiptapMenuBar = ({ editor }: { editor: Editor | null }) => {
         >
           <Underline className="w-4 h-4" />
         </Button>
+        <Button
+          size="xs"
+          title="Strike"
+          variant={editor.isActive("strike") ? "default" : "ghost"}
+          onClick={() => editor.chain().focus().toggleStrike().run()}
+        >
+          <Strikethrough className="w-4 h-4" />
+        </Button>
       </div>
+      <Button
+        size="xs"
+        title="Code Block"
+        variant={editor.isActive("strike") ? "default" : "ghost"}
+        onClick={() => editor.chain().focus().toggleStrike().run()}
+      >
+        <CodeXml className="w-4 h-4" />
+      </Button>
 
       {/* Text Alignment */}
       <div>
         <Button
+          className="w-8"
           title="Align Left"
           variant={editor.isActive({ textAlign: "left" }) ? "default" : "ghost"}
           size="xs"
@@ -93,7 +115,9 @@ export const TiptapMenuBar = ({ editor }: { editor: Editor | null }) => {
         >
           <AlignLeft className="w-4 h-4" />
         </Button>
+
         <Button
+          className="w-8"
           title="Align Center"
           variant={
             editor.isActive({ textAlign: "center" }) ? "default" : "ghost"
@@ -103,7 +127,9 @@ export const TiptapMenuBar = ({ editor }: { editor: Editor | null }) => {
         >
           <AlignCenter className="w-4 h-4" />
         </Button>
+
         <Button
+          className="w-8"
           title="Align Right"
           variant={
             editor.isActive({ textAlign: "right" }) ? "default" : "ghost"
@@ -113,7 +139,9 @@ export const TiptapMenuBar = ({ editor }: { editor: Editor | null }) => {
         >
           <AlignRight className="w-4 h-4" />
         </Button>
+
         <Button
+          className="w-8"
           title="Align Justify"
           variant={
             editor.isActive({ textAlign: "justify" }) ? "default" : "ghost"
@@ -122,6 +150,29 @@ export const TiptapMenuBar = ({ editor }: { editor: Editor | null }) => {
           onClick={() => editor.chain().focus().setTextAlign("justify").run()}
         >
           <AlignJustify className="w-4 h-4" />
+        </Button>
+      </div>
+
+      {/* Bullet List && List Item */}
+      <div>
+        <Button
+          className="w-8"
+          title="Unordered List"
+          variant={editor.isActive("bulletlist") ? "default" : "ghost"}
+          size="xs"
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+        >
+          <List className="w-4 h-4" />
+        </Button>
+
+        <Button
+          className="w-8"
+          title="Ordered List"
+          variant={editor.isActive("orderedList") ? "default" : "ghost"}
+          size="xs"
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        >
+          <ListOrderedIcon className="w-4 h-4" />
         </Button>
       </div>
     </div>
